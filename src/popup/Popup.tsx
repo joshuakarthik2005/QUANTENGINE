@@ -208,8 +208,23 @@ function Popup() {
     <div className="quantengine-container">
       {/* Header */}
       <header className="header">
-        <h1 className="title">QuantEngine – Statistical Diagnostics</h1>
-        <p className="subtitle">Runs entirely locally. No data leaves this browser.</p>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div>
+            <h1 className="title">QuantEngine – Statistical Diagnostics</h1>
+            <p className="subtitle">Runs entirely locally. No data leaves this browser.</p>
+          </div>
+          <button 
+            className="btn-link"
+            onClick={() => window.open('https://joshuakarthik2005.github.io/QUANTENGINE/landing.html', '_blank')}
+            title="Visit our website"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            Website
+          </button>
+        </div>
       </header>
 
       {/* Tab Navigation */}
