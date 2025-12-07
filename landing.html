@@ -106,6 +106,7 @@
 
     .nav-links a {
       opacity: 0.8;
+      transition: opacity 0.2s;
     }
 
     .nav-links a:hover {
@@ -214,10 +215,12 @@
       align-items: center;
       gap: 8px;
       box-shadow: 0 14px 30px rgba(37, 99, 235, 0.45);
+      transition: all 0.2s;
     }
 
     .btn-primary:hover {
       background: #1d4ed8;
+      transform: translateY(-1px);
     }
 
     .btn-secondary {
@@ -231,6 +234,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
+      transition: all 0.2s;
     }
 
     .btn-secondary:hover {
@@ -316,12 +320,6 @@
       overflow: hidden;
       border: 1px solid #111827;
       background: #020617;
-    }
-
-    .browser-img img {
-      display: block;
-      width: 100%;
-      height: auto;
     }
 
     .browser-img img {
@@ -706,259 +704,6 @@
       collected. |
       <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a> |
       <a href="https://github.com/joshuakarthik2005/QUANTENGINE" target="_blank" rel="noopener noreferrer">GitHub</a>
-    </footer>
-  </div>
-</body>
-</html>
-
-    header {
-      text-align: center;
-      margin-bottom: 60px;
-    }
-
-    h1 {
-      font-size: 48px;
-      font-weight: 700;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
-      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
-    }
-
-    .subtitle {
-      font-size: 22px;
-      opacity: 0.9;
-      margin-bottom: 40px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      padding: 16px 40px;
-      background: #2a5298;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 18px;
-      font-weight: 600;
-      transition: all 0.3s;
-      box-shadow: 0 4px 15px rgba(42, 82, 152, 0.4);
-    }
-
-    .cta-button:hover {
-      background: #1e3c72;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(42, 82, 152, 0.6);
-    }
-
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 30px;
-      margin-top: 60px;
-    }
-
-    .feature-card {
-      background: rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      padding: 30px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      transition: all 0.3s;
-    }
-
-    .feature-card:hover {
-      background: rgba(255, 255, 255, 0.15);
-      transform: translateY(-5px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .feature-card h3 {
-      font-size: 24px;
-      margin-bottom: 15px;
-      color: #64b5f6;
-    }
-
-    .feature-card p {
-      font-size: 16px;
-      opacity: 0.9;
-    }
-
-    .privacy-section {
-      text-align: center;
-      margin-top: 80px;
-      padding: 40px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .privacy-section h2 {
-      font-size: 32px;
-      margin-bottom: 20px;
-      color: #4caf50;
-    }
-
-    .privacy-section p {
-      font-size: 18px;
-      opacity: 0.9;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    footer {
-      text-align: center;
-      margin-top: 80px;
-      padding-top: 40px;
-      border-top: 1px solid rgba(255, 255, 255, 0.2);
-      opacity: 0.7;
-    }
-
-    .badge {
-      display: inline-block;
-      padding: 8px 16px;
-      background: rgba(100, 181, 246, 0.2);
-      border-radius: 20px;
-      font-size: 14px;
-      margin: 10px 5px;
-      border: 1px solid rgba(100, 181, 246, 0.4);
-    }
-
-    .screenshot-section {
-      margin-top: 80px;
-      text-align: center;
-    }
-
-    .screenshot-section h2 {
-      font-size: 36px;
-      margin-bottom: 40px;
-    }
-
-    .screenshot-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 30px;
-      margin-top: 30px;
-    }
-
-    .screenshot {
-      background: rgba(255, 255, 255, 0.1);
-      padding: 20px;
-      border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .screenshot img {
-      width: 100%;
-      border-radius: 8px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .screenshot p {
-      margin-top: 15px;
-      font-size: 16px;
-      opacity: 0.9;
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>QuantEngine</h1>
-      <p class="subtitle">Professional-Grade Statistical Diagnostics for Quantitative Analysts</p>
-      <a href="https://chrome.google.com/webstore" class="cta-button">Install Chrome Extension</a>
-      <div style="margin-top: 20px;">
-        <span class="badge">100% Local Processing</span>
-        <span class="badge">No Data Collection</span>
-        <span class="badge">Open Source</span>
-      </div>
-    </header>
-
-    <section class="features">
-      <div class="feature-card">
-        <h3>📊 Summary Statistics</h3>
-        <p>Complete descriptive statistics including mean, median, standard deviation, skewness, kurtosis, and percentiles. Get instant insights into your data's central tendency and dispersion.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>📈 Distribution Fitting</h3>
-        <p>Maximum Likelihood Estimation (MLE) for Normal, Laplace, and Student-t distributions. Compare your data against theoretical distributions with visual PDF overlays.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>🧪 Statistical Tests</h3>
-        <p>Jarque-Bera normality test and Kolmogorov-Smirnov goodness-of-fit test. Rigorous hypothesis testing with p-values and clear interpretations.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>⚠️ Tail Risk Metrics</h3>
-        <p>Value at Risk (VaR), Conditional VaR (CVaR), and Hill tail index estimator. Essential tools for understanding extreme events and downside risk.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>📉 Q-Q Plots</h3>
-        <p>Quantile-Quantile plots for visual distribution assessment. Toggle between Normal and Student-t reference distributions to diagnose tail behavior.</p>
-      </div>
-
-      <div class="feature-card">
-        <h3>⏱️ Time-Series Analysis</h3>
-        <p>ACF, PACF, rolling statistics, volatility clustering, AR(1) modeling, and stationarity testing. Complete toolkit for temporal pattern analysis.</p>
-      </div>
-    </section>
-
-    <section class="screenshot-section">
-      <h2>See It In Action</h2>
-      <div class="screenshot-grid">
-        <div class="screenshot">
-          <img src="images/screenshot1.png" alt="Summary Statistics View">
-          <p><strong>Summary Statistics & Tests</strong><br>Comprehensive statistical overview at a glance</p>
-        </div>
-        <div class="screenshot">
-          <img src="images/screenshot2.png" alt="Distribution Fitting">
-          <p><strong>Distribution Analysis</strong><br>MLE fitting with visual PDF comparisons</p>
-        </div>
-        <div class="screenshot">
-          <img src="images/screenshot3.png" alt="Time-Series Analysis">
-          <p><strong>Time-Series Diagnostics</strong><br>ACF, PACF, rolling stats, and stationarity tests</p>
-        </div>
-        <div class="screenshot">
-          <img src="images/screenshot4.png" alt="Visualizations">
-          <p><strong>Professional Visualizations</strong><br>Publication-ready charts and plots</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="privacy-section">
-      <h2>🔒 Privacy First</h2>
-      <p>
-        QuantEngine runs <strong>entirely locally</strong> in your browser. Zero data transmission. 
-        Zero tracking. Zero cloud dependencies. Your data never leaves your machine. 
-        Perfect for analyzing sensitive financial data or proprietary research.
-      </p>
-      <p style="margin-top: 20px;">
-        <a href="privacy.html" style="color: #64b5f6; text-decoration: none;">Read our Privacy Policy →</a>
-      </p>
-    </section>
-
-    <section style="margin-top: 80px; text-align: center;">
-      <h2 style="font-size: 36px; margin-bottom: 30px;">Built for Professionals</h2>
-      <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-top: 40px;">
-        <div style="flex: 1; min-width: 250px; max-width: 300px;">
-          <h3 style="color: #64b5f6; margin-bottom: 15px;">🎓 Students</h3>
-          <p>Learn statistical concepts with interactive analysis tools</p>
-        </div>
-        <div style="flex: 1; min-width: 250px; max-width: 300px;">
-          <h3 style="color: #64b5f6; margin-bottom: 15px;">📊 Data Scientists</h3>
-          <p>Quick diagnostics during exploratory data analysis</p>
-        </div>
-        <div style="flex: 1; min-width: 250px; max-width: 300px;">
-          <h3 style="color: #64b5f6; margin-bottom: 15px;">💰 Quants</h3>
-          <p>Professional-grade tools for financial modeling and risk</p>
-        </div>
-      </div>
-    </section>
-
-    <footer>
-      <p>QuantEngine v1.0.0 | MIT License | <a href="https://github.com/joshuakarthik2005/QUANTENGINE" style="color: #64b5f6; text-decoration: none;">GitHub Repository</a></p>
-      <p style="margin-top: 10px;">All computation runs locally. No data transmitted. No tracking.</p>
     </footer>
   </div>
 </body>
