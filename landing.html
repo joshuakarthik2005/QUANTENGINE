@@ -1,28 +1,715 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>QuantEngine – Professional Statistical Diagnostics for Quants</title>
+  <meta charset="UTF-8" />
+  <title>QuantEngine – Statistical Diagnostics for Quants</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta
+    name="description"
+    content="QuantEngine is a professional, local-only statistical diagnostics toolkit for quants. Run distribution fits, normality tests, and tail risk analytics directly in your browser."
+  />
   <style>
+    :root {
+      --navy: #020617;
+      --navy-soft: #02081c;
+      --navy-mid: #0f172a;
+      --accent: #2563eb;
+      --accent-soft: rgba(37, 99, 235, 0.12);
+      --text-main: #0f172a;
+      --text-muted: #6b7280;
+      --bg: #f3f4f6;
+      --card-bg: #ffffff;
+      --border-soft: #e5e7eb;
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.2);
+    }
+
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
-      color: #ffffff;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
       line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
 
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 20px;
+    a {
+      text-decoration: none;
+      color: inherit;
     }
+
+    button {
+      font-family: inherit;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Top nav */
+    .nav {
+      background: linear-gradient(90deg, #020617, #02081c);
+      color: #e5e7eb;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.25);
+      position: sticky;
+      top: 0;
+      z-index: 20;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-logo {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: radial-gradient(circle at 20% 0, #1d4ed8, #020617);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: #e5e7eb;
+    }
+
+    .nav-title {
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 16px;
+      font-size: 13px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      opacity: 0.8;
+    }
+
+    .nav-links a:hover {
+      opacity: 1;
+    }
+
+    /* Hero */
+    .hero {
+      background: radial-gradient(circle at top left, #1f2937 0, #020617 55%);
+      color: white;
+      padding: 52px 20px 60px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 3.2fr) minmax(0, 4fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media (max-width: 880px) {
+      .hero-inner {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding-top: 36px;
+      }
+    }
+
+    .hero-eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: #9ca3af;
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-size: 32px;
+      line-height: 1.2;
+      font-weight: 650;
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .hero-title {
+        font-size: 26px;
+      }
+    }
+
+    .hero-subtitle {
+      font-size: 14px;
+      color: #cbd5f5;
+      max-width: 440px;
+      margin-bottom: 18px;
+    }
+
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      font-size: 11px;
+      color: #e5e7eb;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      opacity: 0.9;
+    }
+
+    .pill-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      border-radius: 999px;
+      padding: 10px 18px;
+      font-size: 14px;
+      font-weight: 500;
+      color: white;
+      border: none;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 14px 30px rgba(37, 99, 235, 0.45);
+    }
+
+    .btn-primary:hover {
+      background: #1d4ed8;
+    }
+
+    .btn-secondary {
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      color: #e5e7eb;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .hero-note {
+      font-size: 11px;
+      color: #9ca3af;
+      margin-top: 4px;
+    }
+
+    .hero-note strong {
+      color: #e5e7eb;
+    }
+
+    /* Hero preview / fake browser frame */
+    .hero-preview {
+      background: rgba(15, 23, 42, 0.96);
+      border-radius: 20px;
+      padding: 14px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.9);
+    }
+
+    .browser-frame {
+      background: #020617;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid #111827;
+    }
+
+    .browser-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px 10px;
+      background: #020617;
+      border-bottom: 1px solid #111827;
+    }
+
+    .browser-dots {
+      display: flex;
+      gap: 5px;
+    }
+
+    .browser-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #4b5563;
+    }
+
+    .browser-url {
+      flex: 1;
+      margin: 0 10px;
+      height: 18px;
+      border-radius: 999px;
+      background: #02081c;
+      border: 1px solid #111827;
+      display: flex;
+      align-items: center;
+      padding: 0 8px;
+      font-size: 10px;
+      color: #9ca3af;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .browser-url span {
+      opacity: 0.8;
+    }
+
+    .browser-body {
+      background: radial-gradient(circle at top, #02081c, #020617);
+      padding: 12px;
+      min-height: 220px;
+    }
+
+    .browser-img {
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid #111827;
+      background: #020617;
+    }
+
+    .browser-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .browser-img img {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    /* Main sections */
+    .main {
+      flex: 1;
+      padding: 38px 18px 48px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .main-inner {
+      width: 100%;
+      max-width: 1120px;
+      display: flex;
+      flex-direction: column;
+      gap: 26px;
+    }
+
+    .section {
+      background: var(--card-bg);
+      border-radius: var(--radius-lg);
+      padding: 22px 22px 20px;
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.12);
+      border: 1px solid var(--border-soft);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 14px;
+      gap: 16px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 600;
+    }
+
+    .section-subtitle {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Features grid */
+    .features-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 720px) {
+      .features-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .feature-card {
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-soft);
+      padding: 12px 12px 10px;
+      background: #f9fafb;
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+
+    .feature-card:hover {
+      box-shadow: 0 10px 25px rgba(15, 23, 42, 0.12);
+      transform: translateY(-1px);
+    }
+
+    .feature-label {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Screenshot / details */
+    .shot-wrapper {
+      border-radius: var(--radius-md);
+      border: 1px dashed #cbd5f5;
+      background: #eff3ff;
+      padding: 10px;
+      font-size: 12px;
+      color: #4b5563;
+    }
+
+    .shot-note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    /* Privacy strip */
+    .privacy-strip {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 12px;
+      padding: 10px 12px;
+      border-radius: var(--radius-md);
+      background: #ecfdf5;
+      border: 1px solid #bbf7d0;
+      color: #14532d;
+      align-items: center;
+    }
+
+    .privacy-pill {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid #bbf7d0;
+      background: #f0fdf4;
+      font-size: 11px;
+    }
+
+    /* Roadmap */
+    .roadmap-list {
+      font-size: 12px;
+      color: var(--text-muted);
+      padding-left: 18px;
+    }
+
+    .roadmap-list li {
+      margin-bottom: 4px;
+    }
+
+    /* Footer */
+    .footer {
+      padding: 16px 20px 24px;
+      font-size: 11px;
+      color: #9ca3af;
+      text-align: center;
+    }
+
+    .footer a {
+      color: #6b7280;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <!-- Top navigation -->
+    <header class="nav">
+      <div class="nav-left">
+        <div class="nav-logo">QE</div>
+        <div class="nav-title">QuantEngine</div>
+      </div>
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#roadmap">Roadmap</a>
+      </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+      <div class="hero-inner">
+        <div>
+          <div class="hero-eyebrow">FOR QUANTS, RESEARCHERS & TRADERS</div>
+          <h1 class="hero-title">
+            Instant statistical diagnostics,<br />
+            right inside your browser.
+          </h1>
+          <p class="hero-subtitle">
+            QuantEngine is a professional diagnostics toolkit for quantitative
+            workflows. Paste returns or P&amp;L and immediately see distribution
+            fits, hypothesis tests and tail risk metrics — with all computation
+            running locally in the browser.
+          </p>
+
+          <div class="hero-pills">
+            <span class="pill">
+              <span class="pill-dot"></span> Local-only • No data leaves browser
+            </span>
+            <span class="pill">
+              <span class="pill-dot"></span> Normal, t &amp; Laplace fits
+            </span>
+            <span class="pill">
+              <span class="pill-dot"></span> VaR, CVaR, Hill tail index
+            </span>
+          </div>
+
+          <div class="hero-actions">
+            <button
+              class="btn-primary"
+              onclick="window.open('https://github.com/joshuakarthik2005/QUANTENGINE', '_blank')"
+            >
+              ➜ Add to Chrome
+            </button>
+            <button
+              class="btn-secondary"
+              onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})"
+            >
+              View features
+            </button>
+          </div>
+          <div class="hero-note">
+            <strong>No tracking.</strong> No external APIs. No remote code.
+            QuantEngine runs entirely inside your browser process.
+          </div>
+        </div>
+
+        <div class="hero-preview">
+          <div class="browser-frame">
+            <div class="browser-topbar">
+              <div class="browser-dots">
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+                <div class="browser-dot"></div>
+              </div>
+              <div class="browser-url">
+                <span>chrome://extensions • QuantEngine side panel</span>
+              </div>
+            </div>
+            <div class="browser-body">
+              <div class="browser-img">
+                <img src="images/screenshot1.png" alt="QuantEngine extension screenshot" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <main class="main">
+      <div class="main-inner">
+        <!-- Features -->
+        <section class="section" id="features">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Built for quantitative workflows</div>
+              <div class="section-subtitle">
+                Everything you need to sanity-check a distribution or risk profile
+                in seconds.
+              </div>
+            </div>
+          </div>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <div class="feature-label">Summary statistics</div>
+              <div class="feature-desc">
+                Mean, variance, standard deviation, skewness, kurtosis, quantiles and
+                percentiles — computed with numerically stable algorithms.
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-label">Distribution fitting</div>
+              <div class="feature-desc">
+                Maximum-likelihood fits for Normal, Laplace and Student-t
+                distributions, with clear parameter estimates and consistency checks.
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-label">Hypothesis tests</div>
+              <div class="feature-desc">
+                Jarque–Bera and Kolmogorov–Smirnov normality checks with p-values
+                and explicit accept/reject labels for model assumptions.
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-label">Tail risk metrics</div>
+              <div class="feature-desc">
+                Historical VaR and CVaR at multiple confidence levels, plus a Hill
+                tail index estimate to highlight heavy-tailed behaviour.
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-label">Time-Series Analysis</div>
+              <div class="feature-desc">
+                ACF, PACF, rolling statistics, volatility clustering, AR(1) modeling,
+                and stationarity testing for temporal pattern detection.
+              </div>
+            </div>
+
+            <div class="feature-card">
+              <div class="feature-label">Side-panel native</div>
+              <div class="feature-desc">
+                Runs in Chrome's side panel next to TradingView, Jupyter, PDFs or
+                internal dashboards — no context switching required.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Screenshot / demo details -->
+        <section class="section">
+          <div class="section-header">
+            <div>
+              <div class="section-title">See it in context</div>
+              <div class="section-subtitle">
+                QuantEngine is designed to sit alongside your existing research tools,
+                not replace them.
+              </div>
+            </div>
+          </div>
+
+          <div class="shot-wrapper">
+            <strong>Professional visualizations included:</strong>
+            <ul style="margin-top:6px; padding-left:18px;">
+              <li>Histogram with overlaid Normal, Laplace, and Student-t PDFs</li>
+              <li>Q–Q plots with toggle between Normal and Student-t reference distributions</li>
+              <li>ACF/PACF stem plots with confidence bands for time-series analysis</li>
+              <li>Rolling statistics charts tracking local mean and volatility</li>
+            </ul>
+          </div>
+          <div class="shot-note">
+            All charts are publication-ready with clean styling and proper axis labels.
+          </div>
+        </section>
+
+        <!-- Privacy / local compute -->
+        <section class="section" id="privacy">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Local-only by design</div>
+              <div class="section-subtitle">
+                For firms that care deeply about privacy, latency and control.
+              </div>
+            </div>
+          </div>
+
+          <div class="privacy-strip">
+            <span class="privacy-pill">No data leaves your browser</span>
+            <span class="privacy-pill">No tracking, no analytics</span>
+            <span class="privacy-pill">No external APIs or remote code</span>
+            <span>
+              QuantEngine processes your data entirely inside the browser. Datasets
+              are not uploaded, logged or shared with any server or third party.
+            </span>
+          </div>
+        </section>
+
+        <!-- Roadmap -->
+        <section class="section" id="roadmap">
+          <div class="section-header">
+            <div>
+              <div class="section-title">Roadmap</div>
+              <div class="section-subtitle">
+                Current release includes statistical diagnostics and time-series analysis.
+                Future modules will extend into portfolio and risk management.
+              </div>
+            </div>
+          </div>
+
+          <ul class="roadmap-list">
+            <li>
+              <strong>✓ v1.0</strong> – Statistical diagnostics: summary stats,
+              distribution fits, normality tests, VaR/CVaR and tail index.
+            </li>
+            <li>
+              <strong>✓ v1.1</strong> – Time-Series Lab: ACF/PACF, rolling statistics,
+              AR(1) quick fits and stationarity checks.
+            </li>
+            <li>
+              <strong>→ v1.2+</strong> – Portfolio and risk modules, microstructure
+              tools and simulation utilities.
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      QuantEngine v1.0.0 – Statistical Diagnostics. All computation runs locally. No data
+      collected. |
+      <a href="privacy.html" target="_blank" rel="noopener noreferrer">Privacy policy</a> |
+      <a href="https://github.com/joshuakarthik2005/QUANTENGINE" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </footer>
+  </div>
+</body>
+</html>
 
     header {
       text-align: center;
