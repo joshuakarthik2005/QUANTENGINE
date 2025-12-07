@@ -1,0 +1,25 @@
+{
+  "manifest_version": 3,
+  "name": "QuantEngine – Statistical Diagnostics",
+  "version": "1.0.0",
+  "description": "Local-only statistical diagnostics for quant research: distribution fitting, tests, VaR, CVaR and more.",
+  "action": {
+    "default_icon": {
+      "16": "icons/icon16.svg",
+      "48": "icons/icon48.svg",
+      "128": "icons/icon128.svg"
+    }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "side_panel": {
+    "default_path": "popup.html"
+  },
+  "icons": {
+    "16": "icons/icon16.svg",
+    "48": "icons/icon48.svg",
+    "128": "icons/icon128.svg"
+  },
+  "permissions": ["sidePanel"]
+}

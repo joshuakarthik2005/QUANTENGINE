@@ -1,0 +1,42 @@
+{
+  "name": "quantengine-statistical-diagnostics",
+  "version": "1.0.0",
+  "description": "Professional-grade statistical diagnostics engine for quantitative research - runs entirely locally",
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit",
+    "package": "powershell -ExecutionPolicy Bypass -File ./package-extension.ps1"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.268",
+    "@types/react": "^18.2.43",
+    "@types/react-dom": "^18.2.17",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.8"
+  },
+  "keywords": [
+    "statistics",
+    "quantitative",
+    "finance",
+    "quant",
+    "distribution",
+    "VaR",
+    "CVaR",
+    "tail-risk",
+    "chrome-extension"
+  ],
+  "author": "QuantEngine",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/joshuakarthik2005/QUANTENGINE.git"
+  }
+}
