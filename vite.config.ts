@@ -17,8 +17,8 @@ export default defineConfig({
         // Copy manifest
         copyFileSync('manifest.json', 'dist/manifest.json');
         
-        // Copy icons
-        ['icon16.svg', 'icon48.svg', 'icon128.svg'].forEach(icon => {
+        // Copy PNG icons
+        ['icon16.png', 'icon48.png', 'icon128.png'].forEach(icon => {
           copyFileSync(`icons/${icon}`, `dist/icons/${icon}`);
         });
         
